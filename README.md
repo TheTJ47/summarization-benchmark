@@ -54,8 +54,7 @@ summarization-benchmark/
 
 ### Getting Started on Kaggle
 
-1. Open[Uploading task-3-10-models (1).ipynb…]()
- the [notebook on Kaggle](https://www.kaggle.com/code/ai003tejas/task-3-10-models) 
+1. Open the Notebook [Click here to open](https://www.kaggle.com/code/ai003tejas/task-3-10-models) 
 2. Ensure that the Kaggle kernel environment includes GPU acceleration (enable GPU under **Notebook Settings**).
 3. Install required packages inside the Kaggle notebook (if not pre-installed):
 
@@ -74,7 +73,7 @@ summarization-benchmark/
 
 ## How to Use (Kaggle)
 
-- Run the entire pipeline inside `notebook.ipynb` on Kaggle.
+- Run the entire pipeline inside `Task 3 - 10 models.ipynb` on Kaggle.
 - No command-line usage or local setup is necessary.
 - Datasets are automatically loaded using Hugging Face API within the notebook.
 
@@ -133,6 +132,8 @@ python-Levenshtein
 ---
 
 ## Results & Visualizations
+
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/9a1ba4f4-db77-4265-a713-1d71f3a4b8c9" />
 
 Output ROUGE scores and runtime plots are generated directly in the notebook interface.
 
