@@ -1,36 +1,33 @@
 # Multi-Document Abstractive Summarization Benchmark
 
-This repository presents a rigorous implementation, training, and evaluation benchmark of ten multi-document abstractive summarization models on the CNN/Daily Mail dataset. The project is designed for reproducibility, extensibility, and fair model comparison using standardized evaluation metrics.
+This repository presents a rigorous implementation, training, and evaluation benchmark of ten multi-document abstractive summarization models using **Kaggle Notebooks**. The project is designed for reproducibility, extensibility, and fair model comparison using standardized evaluation metrics.
 
 ---
 
 ## Overview
 
+- **Platform**: Kaggle Notebooks
 - **Language**: Python 3.9+
 - **Frameworks**: PyTorch, Hugging Face Transformers
 - **Evaluation**: ROUGE-1, ROUGE-2, ROUGE-L (F1-scores)
-- **Dataset**: CNN/Daily Mail (via Hugging Face or local CSVs)
+- **Dataset**: CNN/Daily Mail (via Hugging Face datasets)
 - **Usage**: Research, comparative analysis, educational demonstration
 
 ---
 
-## Folder Structure
+## Folder Structure (For Reference Only)
 
 ```
 summarization-benchmark/
-├── data/                # Raw and preprocessed datasets
-│   ├── train.csv
-│   ├── validation.csv
-│   └── test.csv
-├── models/              # Saved model checkpoints
+├── data/                # Dataset files if used locally (not needed on Kaggle)
+├── models/              # Saved model checkpoints (optional)
 ├── outputs/             # Model-generated summaries
 ├── results/             # Evaluation results and plots
 │   ├── rouge_scores_comparison.png
 │   └── training_time_comparison.png
-├── scripts/             # Automation scripts
-│   └── run_all_models.py
-├── requirements.txt     # Project dependencies
-├── notebook.ipynb       # Main end-to-end workflow
+├── scripts/             # Utility scripts (if migrated for offline use)
+├── requirements.txt     # Dependency reference
+├── notebook.ipynb       # Main end-to-end workflow (Kaggle)
 └── README.md            # Project documentation
 ```
 
@@ -53,45 +50,33 @@ summarization-benchmark/
 
 ---
 
-## Setup Instructions
+## Setup Instructions (Kaggle Environment)
 
-### Prerequisites
+### Getting Started on Kaggle
 
-- Python 3.9+
-- PyTorch
-- CUDA 11+ enabled GPU (recommended)
+1. Open[Uploading task-3-10-models (1).ipynb…]()
+ the [notebook on Kaggle](https://www.kaggle.com/code/ai003tejas/task-3-10-models) 
+2. Ensure that the Kaggle kernel environment includes GPU acceleration (enable GPU under **Notebook Settings**).
+3. Install required packages inside the Kaggle notebook (if not pre-installed):
 
-### Installation
-
-```bash
-git clone https://github.com/YOUR_GITHUB/summarization-benchmark.git
-cd summarization-benchmark
-pip install -r requirements.txt
+```python
+!pip install transformers datasets rouge-score evaluate sentencepiece nltk gensim scikit-learn matplotlib python-Levenshtein
 ```
 
-### Dataset
-
-- Load via Hugging Face (`cnn_dailymail`) or
-- Place `train.csv`, `validation.csv`, and `test.csv` inside `./data/`
+4. Execute the notebook cells sequentially to:
+   - Load data from Hugging Face datasets
+   - Preprocess and tokenize input
+   - Run all summarization models
+   - Evaluate using ROUGE
+   - Visualize the results
 
 ---
 
-## How to Use
+## How to Use (Kaggle)
 
-### Option 1: Jupyter Notebook (Recommended)
-
-Run the full pipeline by executing all cells in `notebook.ipynb`:
-- Dataset preparation
-- Preprocessing
-- Model loading and inference
-- Evaluation and visualization
-
-### Option 2: Python Script
-
-Automate the full workflow:
-```bash
-python scripts/run_all_models.py
-```
+- Run the entire pipeline inside `notebook.ipynb` on Kaggle.
+- No command-line usage or local setup is necessary.
+- Datasets are automatically loaded using Hugging Face API within the notebook.
 
 ---
 
@@ -123,13 +108,14 @@ Scores are computed as F1-measures and averaged over the test set.
 ## Known Issues & Workarounds
 
 - **Unavailable weights**: Models without public weights are simulated using robust approximations (e.g., Lead-3, TextRank).
-- **Dependency conflicts**: Resolved by pinning versions in `requirements.txt`.
-- **Unstable libraries**: Custom fallback logic used for graph-based modules.
+- **Package versions**: Kaggle pre-installs most libraries; others can be installed in the notebook.
+- **Unstable modules**: Custom fallback logic used for graph-based components.
 
 ---
 
-## Requirements
+## Requirements (For Reference Only)
 
+Packages used within the notebook:
 ```txt
 torch==2.0.1
 transformers==4.30.2
@@ -148,20 +134,18 @@ python-Levenshtein
 
 ## Results & Visualizations
 
-Performance charts and metrics are saved in the `results/` folder:
-- ROUGE score comparison: `rouge_scores_comparison.png`
-- Training time comparison: `training_time_comparison.png`
+Output ROUGE scores and runtime plots are generated directly in the notebook interface.
 
 ---
 
 ## Citation
 
 ```bibtex
-@project{summarization-benchmark2025,
+@project{summarization-benchmark,
   title={Implementation and Evaluation of Multi-Document Abstractive Summarization Models},
-  author={Your Name},
+  author={Tejas Bagal},
   year={2025},
-  url={https://github.com/YOUR_GITHUB/summarization-benchmark}
+  url={https://github.com/TheTk47/summarization-benchmark}
 }
 ```
 
@@ -169,5 +153,5 @@ Performance charts and metrics are saved in the `results/` folder:
 
 ## Contact
 
-- **Email**: your.email@domain.com
-- **GitHub Issues**: [Open an issue](https://github.com/YOUR_GITHUB/summarization-benchmark/issues)
+- **Email**: bagaltejas97@gmail.com
+- **GitHub Issues**: [Open an issue](https://github.com/TheTJ47/summarization-benchmark/issues)
