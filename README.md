@@ -1,183 +1,134 @@
 Implementation and Evaluation of Multi-Document Abstractive Summarization Models
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python Version">
-<img src="https://img.shields.io/badge/Framework-PyTorch-orange.svg" alt="Framework">
-<img src="https://img.shields.io/badge/Library-Hugging%20Face-yellow.svg" alt="Library">
-<a href="https://github.com/YOUR_GITHUB/summarization-benchmark/blob/main/LICENSE">
-<img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
-</a>
-</p>
+This repository presents a comprehensive benchmark of 10 multi-document abstractive summarization models. It includes full implementations, fine-tuning, and evaluation pipelines using the CNN/Daily Mail dataset. Each model is compared head-to-head using ROUGE-1, ROUGE-2, and ROUGE-L metrics, ensuring consistency and reproducibility.
 
-This repository provides a comprehensive benchmark of prominent multi-document abstractive summarization models. It includes the implementation, fine-tuning, and evaluation of ten distinct approaches on the CNN/Daily Mail dataset. Each model is rigorously benchmarked using ROUGE-1, ROUGE-2, and ROUGE-L metrics to enable a fair, head-to-head comparison. The codebase is designed for clarity, extensibility, and full reproducibility.
+📊 ROUGE Score Comparison Chart
+Performance is visualized through ROUGE metric plots and training time comparisons, located in the results/ directory.
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/YOUR_GITHUB/summarization-benchmark/main/results/rouge_scores_comparison.png" alt="ROUGE Score Comparison Chart" width="80%">
-</p>
-
-📋 Table of Contents
-Folder Structure
-
-Getting Started
-
-Models Implemented
-
-Dataset Preparation
-
-Training & Inference
-
-Evaluation
-
-Results & Visualization
-
-Hyperparameters
-
-Issues Encountered & Workarounds
-
-How to Use / Run Each Model
-
-Requirements
-
-Citation
-
-Contact
-
-1. Folder Structure
-The repository is organized to separate data, source code, and outputs, ensuring clarity and ease of use.
-
+📁 Folder Structure
+bash
+Copy code
 summarization-benchmark/
-├── data/                   # Raw and processed datasets
+├── data/                # Raw and preprocessed datasets
 │   ├── train.csv
 │   ├── validation.csv
 │   └── test.csv
-├── models/                 # Saved model checkpoints (if any)
-├── outputs/                # Model-generated summaries
-├── results/                # ROUGE tables, plots, and logs
+├── models/              # Saved model checkpoints
+├── outputs/             # Model-generated summaries
+├── results/             # Evaluation logs and plots
 │   ├── rouge_scores_comparison.png
 │   └── training_time_comparison.png
-├── scripts/                # Utility and model runner scripts
+├── scripts/             # Utility and runner scripts
 │   └── run_all_models.py
-├── requirements.txt        # Required Python dependencies
-├── README.md               # You are here!
-└── notebook.ipynb          # Main end-to-end workflow notebook
-
-2. Getting Started
-Follow these steps to set up the project environment and run the benchmark.
-
-Prerequisites:
-
+├── requirements.txt     # Required Python dependencies
+├── README.md            # Project documentation
+└── notebook.ipynb       # Main workflow notebook
+🚀 Getting Started
+Prerequisites
 Python 3.9+
 
 PyTorch
 
-CUDA 11+ enabled GPU (recommended for neural models)
+CUDA 11+ (Recommended)
 
-Quick Start:
-
-Clone the repository:
-
+Quick Setup
+bash
+Copy code
 git clone https://github.com/YOUR_GITHUB/summarization-benchmark.git
 cd summarization-benchmark
-
-Install all dependencies:
-
 pip install -r requirements.txt
+Place dataset files in the /data directory if using local CSVs.
 
-Place the dataset (if using local CSVs) in the /data directory.
+Launch the end-to-end pipeline using:
 
-Run the benchmark: Open and execute the cells in notebook.ipynb for the complete end-to-end workflow, including training, inference, and evaluation.
+bash
+Copy code
+jupyter notebook notebook.ipynb
+🧠 Models Implemented
+Model	Type / Source
+1. PRIMERA	Transformer (Proxy Approximation)
+2. BART	Hugging Face – facebook/bart-large-cnn
+3. PEGASUS	Hugging Face – google/pegasus-cnn_dailymail
+4. T5 (Base, Large)	Hugging Face
+5. Longformer / BigBird / LongT5	Long-range Transformers (Proxy)
+6. Absformer	Lead-3 Proxy (Unsupervised)
+7. TextRank	Graph-Based (Extractive)
+8. Hierarchical Transformer	Two-Stage Simulation
+9. DCA (Deep Communicating Agents)	Ensemble Simulation
+10. Topic-Guided Model	Neural + External Knowledge
 
-3. Models Implemented
-This project benchmarks a diverse set of models, from state-of-the-art transformers to classical graph-based methods. Models without public weights are approximated using robust, open-source proxies, which are clearly noted.
+🧾 Dataset Preparation
+Primary Dataset: CNN/Daily Mail, loaded via Hugging Face or /data CSVs.
 
-#
+Preprocessing includes:
 
-Model
+Whitespace normalization
 
-Type / Source
+Token-level cleanup
 
-1 PRIMERA (Documented, proxy only)
+Prefix formatting (e.g., "summarize: " for T5)
 
-2 BART -Neural, Hugging Face (facebook/bart-large-cnn)
+You can customize the dataset size and batch processing directly in the notebook.
 
-3 PEGASUS - Neural, Hugging Face (google/pegasus-cnn_dailymail)
+🔧 Training & Inference
+Supervised Models (BART, PEGASUS, T5):
 
-4 T5 Neural, Hugging Face (t5-base, t5-large)
+Support both inference and optional fine-tuning (1 epoch default)
 
-5 Longformer/BigBird/LongT5 - Neural, public proxy
+Unsupervised & Graph-Based Models:
 
-6 Absformer - Unsupervised, Lead-3 proxy
+Implemented using nltk, scikit-learn, and gensim
 
-7 Graph-based (TextRank) - Extractive/Graph
+All models use the same test subset for fair comparison.
 
-8 Hierarchical Transformer - Two-stage neural simulation
+📐 Evaluation Metrics
+Each model is evaluated using:
 
-9 Deep Communicating Agents (DCA) - Ensemble simulation
+ROUGE-1: Unigram overlap
 
-10 Topic-Guided - Neural + external knowledge
+ROUGE-2: Bigram overlap
 
-4. Dataset Preparation
-The primary dataset is CNN/Daily Mail, loaded directly from Hugging Face datasets or local CSV files located in the /data/ directory.
+ROUGE-L: Longest common subsequence (sentence-level)
 
-Preprocessing steps include uniform whitespace normalization, basic text cleaning, and model-specific formatting (e.g., adding a "summarize: " prefix for T5).
+Results are reported as F1-scores, averaged across all test samples.
 
-The number of examples and batch sizes are configurable within the main notebook.
+📊 Results & Visualizations
+Output ROUGE tables and plots are available in:
 
-5. Training & Inference
-Supervised Models (BART, PEGASUS, T5): These are loaded from Hugging Face Transformers. The provided pipeline supports both fine-tuning (a single epoch by default) and pure inference on the test set.
+Copy code
+results/
+├── rouge_scores_comparison.png
+├── training_time_comparison.png
+└── evaluation_logs/
+⚙️ Hyperparameters
+Parameter	Value
+Random Seed	42
+Batch Size	4 (default)
+Max Input Length	512–4096 tokens
+Max Summary Length	128 tokens
+Beam Size	4
+Device	GPU/CPU
+Learning Rate	2e-5
 
-Unsupervised & Graph-based Models: These are implemented using libraries like NLTK and scikit-learn to perform extractive summarization (e.g., Lead-3, sentence graph ranking).
+🛠️ Issues Encountered & Workarounds
+Unavailable Weights: For some models (e.g., Absformer, TG-MultiSum), public checkpoints do not exist. Proxy implementations like Lead-3 or TextRank were used and clearly marked.
 
-All models are run on the same test data subset to ensure a fair and direct comparison.
+Library Conflicts: Resolved via stable versions listed in requirements.txt
 
-6. Evaluation
-All models are evaluated against the reference summaries from the CNN/Daily Mail test set using the following metrics:
+Graph-Based Instability: Replaced some third-party libraries with in-house fallback code.
 
-ROUGE-1: Overlap of unigrams (individual words).
+🧪 How to Run Models
+Option A: Interactive (Recommended)
+Open and run all cells in notebook.ipynb.
 
-ROUGE-2: Overlap of bigrams (pairs of words).
+Option B: Automated Script
+Modify and run:
 
-ROUGE-L: Longest common subsequence, which measures sentence-level structure similarity.
-
-The final reported scores are the ROUGE F1-measures, averaged across all samples in the evaluation batch.
-
-7. Results & Visualization
-The following table summarizes the performance of each model on the test set.
-
-<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/5d83784a-80c1-4f99-a373-66e5badecb0d" />
-
-
-8. Hyperparameters
-To ensure reproducibility, the experiments are run with the following key hyperparameters:
-
-Random Seed: 42
-
-Batch Size: Configurable (defaults to 4)
-
-Max Input Length: 512-4096 tokens (model-dependent)
-
-Max Summary Length: 128 tokens
-
-Beam Size (Decoding): 4
-
-Device: GPU (if available), otherwise CPU
-
-Learning Rate: 2e-5 (for fine-tuning transformers)
-
-9. Issues Encountered & Workarounds
-Unavailable Model Weights: For some research models (e.g., Absformer, TG-MultiSum), official weights are not public. These were approximated with robust algorithmic proxies (e.g., Lead-3, TextRank), which are clearly noted in the code and documentation.
-
-Dependency Conflicts: Resolved by creating a stable requirements.txt file with tested library versions.
-
-Library Issues: Fallback custom implementations were created for certain graph-based algorithms to avoid unstable third-party libraries.
-
-10. How to Use / Run Each Model
-Jupyter/Colab (notebook.ipynb): The recommended method. Execute cells in sequence to run the entire pipeline. The evaluation loop will automatically train, evaluate, and compare all configured models.
-
-Python Script (scripts/run_all_models.py): For automated runs, modify the script to call each model by name, process data in batches, and collect results.
-
-11. Requirements
-All necessary dependencies are listed in the requirements.txt file.
-
+bash
+Copy code
+python scripts/run_all_models.py
+📦 Requirements
+txt
+Copy code
 torch==2.0.1
 transformers==4.30.2
 datasets==2.13.1
@@ -189,26 +140,25 @@ python-Levenshtein
 gensim
 scikit-learn
 matplotlib
+Install via:
 
-Install them with:
-
+bash
+Copy code
 pip install -r requirements.txt
+📄 Citation
+If you use this repository, please cite:
 
-12. Citation
-If you use or extend this work for your research, please cite it as follows:
-
+bibtex
+Copy code
 @project{summarization-benchmark2025,
   title={Implementation and Evaluation of Multi-Document Abstractive Summarization Models},
   author={Your Name},
   year={2025},
   url={https://github.com/YOUR_GITHUB/summarization-benchmark}
 }
-
-13. Contact
-For questions, improvements, or collaborations, please feel free to reach out:
+📬 Contact
+For questions, contributions, or collaborations:
 
 Email: your.email@domain.com
 
-GitHub Issues: Please open an issue on this repository for any bugs or feature requests.
-
-This documentation was generated to ensure clarity, full reproducibility, and compliance with all research assignment instructions.
+Issues: Submit a GitHub Issue
