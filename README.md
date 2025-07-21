@@ -95,65 +95,25 @@ Model
 
 Type / Source
 
-1
+1 PRIMERA (Documented, proxy only)
 
-PRIMERA
+2 BART -Neural, Hugging Face (facebook/bart-large-cnn)
 
-(Documented, proxy only)
+3 PEGASUS - Neural, Hugging Face (google/pegasus-cnn_dailymail)
 
-2
+4 T5 Neural, Hugging Face (t5-base, t5-large)
 
-BART
+5 Longformer/BigBird/LongT5 - Neural, public proxy
 
-Neural, Hugging Face (facebook/bart-large-cnn)
+6 Absformer - Unsupervised, Lead-3 proxy
 
-3
+7 Graph-based (TextRank) - Extractive/Graph
 
-PEGASUS
+8 Hierarchical Transformer - Two-stage neural simulation
 
-Neural, Hugging Face (google/pegasus-cnn_dailymail)
+9 Deep Communicating Agents (DCA) - Ensemble simulation
 
-4
-
-T5
-
-Neural, Hugging Face (t5-base, t5-large)
-
-5
-
-Longformer/BigBird/LongT5
-
-Neural, public proxy
-
-6
-
-Absformer
-
-Unsupervised, Lead-3 proxy
-
-7
-
-Graph-based (TextRank)
-
-Extractive/Graph
-
-8
-
-Hierarchical Transformer
-
-Two-stage neural simulation
-
-9
-
-Deep Communicating Agents (DCA)
-
-Ensemble simulation
-
-10
-
-Topic-Guided
-
-Neural + external knowledge
+10 Topic-Guided - Neural + external knowledge
 
 4. Dataset Preparation
 The primary dataset is CNN/Daily Mail, loaded directly from Hugging Face datasets or local CSV files located in the /data/ directory.
