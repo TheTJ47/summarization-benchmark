@@ -152,7 +152,4 @@ Output ROUGE scores and runtime plots are generated directly in the notebook int
 
 ---
 
-## Contact
 
-- **Email**: bagaltejas97@gmail.com
-- **GitHub Issues**: [Open an issue](https://github.com/TheTJ47/summarization-benchmark/issues)
